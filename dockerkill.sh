@@ -23,7 +23,7 @@ case "$1" in
         then
         docker stop $dockps
         docker rm $dockps
-        ng fi
+        fi
         ;;
     images)
         echo "Warning!!! Remove all the docker images. yes to continue...?"
