@@ -12,8 +12,8 @@ case "$1" in
         input 
         if [[ $REPLY =~ ^[Yy]$ ]]
         then
-        docker rmi $(docker images -aq)
-        docker rm $dockps
+        docker rmi -f $(docker images -aq)
+        docker rm -f $dockps
         fi
         ;;
     cntr)
@@ -23,20 +23,28 @@ case "$1" in
         then
         docker stop $dockps
         docker rm $dockps
-        ng fi
+        fi
         ;;
     images)
         echo "Warning!!! Remove all the docker images. yes to continue...?"
         input
         if [[ $REPLY =~ ^[Yy]$ ]]
         then
-        docker rmi $dockps
+        docker rmi $(docker images -aq)
         fi
         ;;
     help)
         echo 
-        echo """all - Delete all the docker images and docker containers. Use it with Caution!
-                cntr - Delete all the uontainers after stopping them"""
+        echo """Command to delete, kill, docker images and containers.
+ 
+SYNTAX  - dockerkill <options>
+
+OPTIONS
+
+all    - Delete all the docker images and docker containers forcefully. Use it with Caution!
+cntr   - Delete all the uontainers after stopping them
+images - Remove all the downloaded docker images
+ """
         ;;
     *)
         echo "Requires argument. help for more options"
